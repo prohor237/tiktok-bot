@@ -1,3 +1,3 @@
-python-telegram-bot==13.7
+python-telegram-bot==20.8
 TikTokApi==6.0.0
 playwright==1.44.0
