@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 api = TikTokApi.get_instance(use_selenium=True)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Отправь ссылку на TikTok видео, и я скачаю его!")
+    await update.message.reply_text("РћС‚РїСЂР°РІСЊ СЃСЃС‹Р»РєСѓ РЅР° TikTok РІРёРґРµРѕ, Рё СЏ СЃРєР°С‡Р°СЋ РµРіРѕ!")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_text = update.message.text
@@ -20,24 +20,24 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     if re.match(tiktok_url_pattern, message_text):
         try:
-            await update.message.reply_text("Скачиваю видео...")
+            await update.message.reply_text("РЎРєР°С‡РёРІР°СЋ РІРёРґРµРѕ...")
             video_data = api.video(url=message_text)
             video_bytes = video_data.bytes()
             temp_file = "temp_video.mp4"
             with open(temp_file, "wb") as f:
                 f.write(video_bytes)
             with open(temp_file, "rb") as f:
-                await update.message.reply_video(video=f, caption="Вот твое видео!")
+                await update.message.reply_video(video=f, caption="Р’РѕС‚ С‚РІРѕРµ РІРёРґРµРѕ!")
             os.remove(temp_file)
         except Exception as e:
-            logger.error(f"Ошибка: {e}")
-            await update.message.reply_text("Ошибка! Проверь ссылку или попробуй позже.")
+            logger.error(f"РћС€РёР±РєР°: {e}")
+            await update.message.reply_text("РћС€РёР±РєР°! РџСЂРѕРІРµСЂСЊ СЃСЃС‹Р»РєСѓ РёР»Рё РїРѕРїСЂРѕР±СѓР№ РїРѕР·Р¶Рµ.")
     else:
-        await update.message.reply_text("Отправь ссылку на TikTok видео.")
+        await update.message.reply_text("РћС‚РїСЂР°РІСЊ СЃСЃС‹Р»РєСѓ РЅР° TikTok РІРёРґРµРѕ.")
 
 async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    logger.error(f"Ошибка: {context.error}")
-    await update.message.reply_text("Что-то пошло не так. Попробуй еще раз.")
+    logger.error(f"РћС€РёР±РєР°: {context.error}")
+    await update.message.reply_text("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє. РџРѕРїСЂРѕР±СѓР№ РµС‰Рµ СЂР°Р·.")
 
 def main():
     TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
