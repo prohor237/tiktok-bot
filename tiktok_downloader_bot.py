@@ -9,7 +9,7 @@ import os
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-api = TikTokApi.get_instance(use_selenium=True)
+api = TikTokApi.get_instance()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Отправь ссылку на TikTok видео, и я скачаю его!")
